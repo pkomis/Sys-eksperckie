@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[polish]{babel}
+\usepackage{float}
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\linespread{1.5}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{biblatex}
+
+\title{Opis projektu - Dietetyka, konfigurowanie posiłków, potraw}
+\author{Kacper Leszczyński, Piotr Komisarczyk, Jan Kruszewski, Adrian Rudź}
+\begin{document}
+\maketitle
+
+% DO PRZEANALIZOWANIA BO TO JEST WYGENEROWANE
+% DO PRZEANALIZOWANIA BO TO JEST WYGENEROWANE
+% DO PRZEANALIZOWANIA BO TO JEST WYGENEROWANE
+% DO PRZEANALIZOWANIA BO TO JEST WYGENEROWANE
+% DO PRZEANALIZOWANIA BO TO JEST WYGENEROWANE
+\section*{1. Wprowadzenie}
+Celem projektu jest stworzenie systemu ekspertowego wspomagającego konfigurowanie posiłków i potraw w zależności od preferencji oraz potrzeb użytkownika. Projekt zostanie zaimplementowany w języku Prolog, zgodnie z zasadami budowy modularnych systemów ekspertowych.
+
+\section*{2. Charakterystyka systemów ekspertowych}
+System ekspertowy (SE) to program komputerowy, który symuluje podejmowanie decyzji przez człowieka–eksperta. Wykorzystuje bazę wiedzy (zawierającą fakty i reguły) oraz mechanizm wnioskowania, aby odpowiadać na pytania i sugerować rozwiązania.
+
+\subsection*{Cechy SE:}
+\begin{itemize}
+  \item oddzielenie wiedzy od mechanizmu sterującego,
+  \item reprezentacja wiedzy za pomocą reguł: \texttt{jeżeli... to...},
+  \item dialog z użytkownikiem,
+  \item możliwość pracy z niepełną wiedzą,
+  \item stosowanie logiki rozmytej lub wielowartościowej.
+\end{itemize}
+
+\section*{3. Opis dziedziny: Dietetyka}
+System będzie działał w dziedzinie dietetyki. Celem jest wsparcie użytkownika w doborze odpowiednich potraw na podstawie:
+\begin{itemize}
+  \item celu dietetycznego (np. redukcja masy ciała, przyrost masy, zdrowie),
+  \item preferencji smakowych,
+  \item alergii,
+  \item czasu przygotowania,
+  \item pory dnia,
+  \item dostępnych składników.
+\end{itemize}
+
+\section*{4. Architektura systemu}
+Zgodnie z założeniami projektowymi system powinien być modularny i składać się z następujących komponentów:
+
+\begin{itemize}
+  \item \textbf{Interfejs użytkownika} – prowadzi dialog i prezentuje sugestie.
+  \item \textbf{Moduł reguł minimalnych} – umożliwia identyfikację niezbędnych informacji;
+  \item \textbf{Baza wiedzy} – zawiera fakty i reguły opisujące składniki, potrawy, cele dietetyczne;
+  \item \textbf{Mechanizm wnioskowania} – łączy fakty i reguły w celu uzyskania wniosków;
+\end{itemize}
+
+\section*{5. Przykład reprezentacji wiedzy w Prologu}
+\subsection*{Fakty:}
+\begin{verbatim}
+skladnik(jajko, bialko, 78).
+skladnik(platki_owsiane, weglowodany, 150).
+alergia(uzytkownik1, gluten).
+cel(uzytkownik1, odchudzanie).
+\end{verbatim}
+
+\subsection*{Reguły:}
+\begin{verbatim}
+mozna_zjesc(Uzytkownik, Danie) :-
+    nie_zawiera_alergenu(Danie, Uzytkownik),
+    odpowiada_celowi_dietetycznemu(Danie, Uzytkownik),
+    dostepne_skladniki(Danie).
+
+proponuj_posilek(Uzytkownik, Posilek) :-
+    mozna_zjesc(Uzytkownik, Posilek),
+    pasuje_do_pory(Posilek, sniadanie).
+\end{verbatim}
+
+\section*{6. Przykład dialogu z użytkownikiem}
+\begin{verbatim}
+System: Jaki masz cel dietetyczny?
+Użytkownik: Odchudzanie
+
+System: Czy masz alergie?
+Użytkownik: Gluten
+
+System: Czy jesz mięso?
+Użytkownik: Nie
+
+System: Proponuję:
+- Śniadanie: Owsianka z owocami
+- Obiad: Kasza z warzywami
+\end{verbatim}
+
+% \section*{7. Wnioski i możliwości rozbudowy}
+% Projektowany system ekspertowy pozwala wspierać użytkownika w zakresie dietetyki w sposób zbliżony do konsultacji z dietetykiem. W przyszłości system można rozbudować o:
+% \begin{itemize}
+%   \item ocenę sezonowości produktów,
+%   \item bardziej zaawansowane wnioskowanie rozmyte,
+%   \item uczenie systemu na podstawie preferencji użytkownika.
+% \end{itemize}
+
+
+\end{document}
